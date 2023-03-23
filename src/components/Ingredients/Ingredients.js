@@ -7,6 +7,10 @@ import Search from "./Search";
 const Ingredients = () => {
   const [userIngredients, setUserIngredients] = useState([]);
 
+  const filterIngredientsHandler = (ingredients) => {
+    setUserIngredients(ingredients);
+  };
+
   useEffect(() => {
     fetch("https://s14-react-http-default-rtdb.firebaseio.com/ingredients.json")
       .then((response) => response.json())
@@ -59,7 +63,7 @@ const Ingredients = () => {
       <IngredientForm onAddIngredient={addIngredientHandler} />
 
       <section>
-        <Search />
+        <Search onLoadIngredients={filterIngredientsHandler} />
         <IngredientList
           ingredients={userIngredients}
           onRemoveItem={removeIngredientHandler}
